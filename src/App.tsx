@@ -5,8 +5,10 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import Layout from 'components/Layout'
-
+import Tags from './views/Tags';
+import Statistics from './views/Statistics';
+import Money from './views/Money';
+import NoMatch from './views/NoMatch';
 
 function App() {
   return (
@@ -28,34 +30,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
-
-function Tags() {
-  return (
-    <Layout>
-      <h2>Tags</h2>
-    </Layout>
-  );
-}
-
-function Money() {
-  return (
-    <Layout>
-      <h2>Money</h2>
-    </Layout>
-  )
-}
-
-function Statistics() {
-  return (
-    <Layout>
-      <h2>statistics</h2>
-    </Layout>
-  )
-}
-
-function NoMatch() {
-  return <h2>当前路径不存在</h2>;
 }
 
 export default App;
