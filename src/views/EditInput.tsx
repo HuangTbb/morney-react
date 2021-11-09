@@ -20,6 +20,8 @@ const DateSection = styled.section`
       height: 50px;
       flex-grow: 1;
       background: #fff;
+      font-family: inherit;
+      font-size: 14px;
     }
   }
 `;
