@@ -35,14 +35,18 @@ const TypeSection = styled.section`
   }
 `;
 const Type: React.FC = () => {
-  const [types] = useState<string[]>(['支出','收入'])
-  const [selectedType, setSelectedType] = useState<string>('支出')
+  const categoryMap = {'-':'支出','+':'收入'}
+  type Keys = keyof typeof categoryMap
+  const [types] = useState<Keys[]>(['-','+'])
+  const [selectedType, setSelectedType] = useState<Keys>('-')
+
   return (
     <TypeSection>
       {types.map(type =>
-        <div key={type} onClick={()=>setSelectedType(type)} className={selectedType === type? 'selected': ''}>
+        <div key={type} onClick={()=>setSelectedType(type)}
+             className={selectedType === type? 'selected': ''}>
           <Icon name={selectedType === type? 'choose': 'nochoose'}/>
-          <p>{type}</p>
+          <p>{categoryMap[type]}</p>
         </div>
       )}
     </TypeSection>
