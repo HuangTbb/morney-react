@@ -34,4 +34,12 @@ body {
   width: 1em;
   height: 1em;
 }
-
+input {
+  outline: none;
+  border: none;
+}
+button {
+  background: none;
+  border: none;
+  font-family: inherit;
+}

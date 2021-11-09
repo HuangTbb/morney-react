@@ -26,7 +26,7 @@ const NavWrapper = styled.nav`
         }
         &.selected{
           > .icon {
-            fill: blue;
+            
           }
         }
       }
@@ -40,19 +40,19 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <NavLink  to="/tags" activeClassName="selected">
+          <NavLink  to="/tags" activeClassName="selected" replace>
             <Icon name="label"/>
             标签
           </NavLink >
         </li>
         <li>
-          <NavLink  to="/money" activeClassName="selected">
+          <NavLink  to="/money" activeClassName="selected" replace>
             <Icon name="money"/>
             记账
           </NavLink >
         </li>
         <li>
-          <NavLink  to="/statistics" activeClassName="selected">
+          <NavLink  to="/statistics" activeClassName="selected" replace>
             <Icon name="statistics"/>
             统计
           </NavLink >
