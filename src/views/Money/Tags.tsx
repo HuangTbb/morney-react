@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, {useState} from 'react';
 
 const TagsSection = styled.section`
   padding: 10px 0;
@@ -19,19 +19,31 @@ const TagsSection = styled.section`
       padding: 0 16px;
       margin: 10px;
       background: #518C9E;
+      &.selected{
+        background: #F4C738;
+      }
     }
   }
 `;
-const Tags = () => {
+const Tags: React.FC = () => {
+  const [tags] = useState<string[]>(['衣','食','住','行'])
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const onToggleTag = (tag: string) => {
+    const index = selectedTags.indexOf(tag)
+    if(index>=0){
+      setSelectedTags(selectedTags.filter(t => t !== tag))
+    }else{
+      setSelectedTags([...selectedTags, tag])
+    }
+  }
   return (
     <TagsSection>
       <ul>
-        <li>衣</li>
-        <li>食</li>
-        <li>住</li>
-        <li>行</li>
+        {tags.map(tag =>
+          <li key={tag} onClick={()=>{onToggleTag(tag)}} className={selectedTags.indexOf(tag)>=0 ? 'selected' : ''}>{tag}</li>
+        )}
       </ul>
     </TagsSection>
   )
 }
-export default Tags;
+export {Tags};

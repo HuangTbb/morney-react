@@ -37,4 +37,4 @@ const EditInput = (props: Props) => {
     </DateSection>
   )
 }
-export default EditInput;
+export {EditInput};

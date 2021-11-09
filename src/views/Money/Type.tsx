@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Icon from '../../components/Icons';
-import React from 'react';
+import React, {useState} from 'react';
 
 const TypeSection = styled.section`
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
@@ -34,12 +34,18 @@ const TypeSection = styled.section`
     }
   }
 `;
-const Type = () => {
+const Type: React.FC = () => {
+  const [types] = useState<string[]>(['支出','收入'])
+  const [selectedType, setSelectedType] = useState<string>('支出')
   return (
     <TypeSection>
-      <div className="selected"><Icon name="choose"/><p>支出</p></div>
-      <div><Icon name="nochoose"/><p>收入</p></div>
+      {types.map(type =>
+        <div key={type} onClick={()=>setSelectedType(type)} className={selectedType === type? 'selected': ''}>
+          <Icon name={selectedType === type? 'choose': 'nochoose'}/>
+          <p>{type}</p>
+        </div>
+      )}
     </TypeSection>
   )
 }
-export default Type;
+export {Type};

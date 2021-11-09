@@ -39,7 +39,7 @@ const NumberPadSection = styled.section`
     }
   }
 `;
-const NumberPad = () => {
+const NumberPad: React.FC = () => {
   return (
     <NumberPadSection>
       <div className="outputSum">0</div>
@@ -67,4 +67,4 @@ const NumberPad = () => {
     </NumberPadSection>
   )
 }
-export default NumberPad;
+export {NumberPad};

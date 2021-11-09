@@ -1,10 +1,10 @@
 import Layout from '../components/Layout';
 import React from 'react';
 import styled from 'styled-components';
-import Type from './Money/Type';
-import Tags from './Money/Tags';
-import NumberPad from './Money/NumberPad';
-import EditInput from './EditInput';
+import {Type} from './Money/Type';
+import {Tags} from './Money/Tags';
+import {NumberPad} from './Money/NumberPad';
+import {EditInput} from './EditInput';
 
 const MyLayout = styled(Layout)`
   display: flex;
