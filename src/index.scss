@@ -43,3 +43,8 @@ button {
   border: none;
   font-family: inherit;
 }
+.clearfix::after{
+  content: "";
+  clear: both;
+  display: block;
+}

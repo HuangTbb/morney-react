@@ -1,6 +1,6 @@
 import React from 'react';
 import {HashRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import Tags from './views/Tags';
+import Label from './views/Label';
 import Statistics from './views/Statistics';
 import Money from './views/Money';
 import NoMatch from './views/NoMatch';
@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/tags">
-            <Tags/>
+            <Label/>
           </Route>
           <Route path="/money">
             <Money/>
