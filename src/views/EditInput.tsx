@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Icon from '../components/Icons';
-import React from 'react';
+import React, {useRef, useState} from 'react';
 
 const DateSection = styled.section`
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
@@ -26,13 +26,26 @@ const DateSection = styled.section`
 type Props = {
   name: string, iconName: string, inputType: string, placeHolder?: string
 }
-const EditInput = (props: Props) => {
+const EditInput: (props: Props) => JSX.Element = (props: Props) => {
+  const [value, setValue] = useState('')
+  const refInput = useRef<HTMLInputElement>(null)
+  const onBlur = () => {
+    if(refInput.current !== null){
+      setValue(refInput.current.value)
+    }
+  }
   return (
     <DateSection>
       <label>
         <Icon name={props.iconName}/>
         <p>{props.name}</p>
-        <input type={props.inputType} placeholder={props.placeHolder || ''}/>
+        <input
+          type={props.inputType}
+          placeholder={props.placeHolder || ''}
+          defaultValue={value}
+          onBlur={onBlur}
+          ref={refInput}
+        />
       </label>
     </DateSection>
   )
