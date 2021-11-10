@@ -1,70 +1,97 @@
-import styled from 'styled-components';
-import React from 'react';
+import React, {useState} from 'react';
+import NumberPadSection from './NumberPad/NumberPadSection';
+import {countSum} from './NumberPad/countSum';
+import {containSign} from './NumberPad/containSign';
 
-const NumberPadSection = styled.section`
-  > .outputSum {
-    padding: 8px 14px;
-    font-size: 18px;
-    text-align: right;
-  }
+const NumberPad: React.FC = () => {
+  const [output, setOutput] = useState('0');
+  const [outputSum, setOutputSum] = useState('0');
 
-  > .output {
-    padding: 8px 14px;
-    font-size: 24px;
-    word-break: break-all;
-    text-align: right;
-  }
+  function inputContent(event: React.MouseEvent) {
+    const input = (event.target as HTMLButtonElement).textContent as string;
+    const eachNum = output.split(/[- |+|×|÷]/g);
 
-  > .pad {
-    padding: 2px;
-    background: rgba(51, 51, 51, 0.1);
+    if (output === '0') {
+      if ('0123456789'.indexOf(input) >= 0) {
+        setOutput(input);
+        setOutputSum(input);
+        return;
+      } else if (containSign(input) >= 0) { return; }
+    }
+    if (output.substr(-1, 1) === '0'
+      && containSign(output.substr(-2, 1)) >= 0
+      && containSign(input) < 0) {
+      setOutput(output.slice(0, -1) + input);
+      return;
+    }
 
-    > button {
-      font-size: 18px;
-      width: 20%;
-      height: 60px;
-      background: #fff;
-      float: left;
-      border: 2px solid rgba(51, 51, 51, 0.1);
-      border-radius: 10px;
-
-      &.ok {
-        height: 120px;
-        float: right;
-      }
-
-      &.zero {
-        width: 40%;
+    if (output.slice(-1) === '.') {
+      if (containSign(input) >= 0) {
+        setOutput(output.slice(0, -1) + input);
+        return;
       }
     }
+
+    if (output.indexOf('.') >= 0) {
+      if (eachNum[eachNum.length - 1].indexOf('.') >= 0 && input === '.') { return;}
+    }
+
+    if (containSign(output.slice(-1)) >= 0) {
+      if (containSign(input) >= 0) {
+        return;
+      } else if (input === '.') {
+        setOutput(output + '0' + input);
+        return;
+      }
+    }
+    setOutput(output + input);
+    setOutputSum(countSum(output + input));
   }
-`;
-const NumberPad: React.FC = () => {
+
+  function remove() {
+    if (output.length === 1) {
+      setOutput('0');
+      setOutputSum('0');
+    } else {
+      setOutput(output.slice(0, -1));
+      setOutputSum(countSum(output.slice(0, -1)));
+    }
+  }
+
+  function clear() {
+    setOutput('0');
+    setOutputSum('0');
+  }
+
+  function ok() {
+    // TODO
+  }
+
   return (
     <NumberPadSection>
-      <div className="outputSum">0</div>
-      <div className="output">0</div>
+      <div className="outputSum">{outputSum}</div>
+      <div className="output">{output}</div>
       <div className="pad clearfix">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>+</button>
-        <button>清除</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>-</button>
-        <button>清空</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>×</button>
-        <button className="ok">确定</button>
-        <button className="zero">0</button>
-        <button>.</button>
-        <button>÷</button>
+        <button onClick={inputContent}>1</button>
+        <button onClick={inputContent}>2</button>
+        <button onClick={inputContent}>3</button>
+        <button onClick={inputContent}>+</button>
+        <button onClick={remove}>删除</button>
+        <button onClick={inputContent}>4</button>
+        <button onClick={inputContent}>5</button>
+        <button onClick={inputContent}>6</button>
+        <button onClick={inputContent}>-</button>
+        <button onClick={clear}>清空</button>
+        <button onClick={inputContent}>7</button>
+        <button onClick={inputContent}>8</button>
+        <button onClick={inputContent}>9</button>
+        <button onClick={inputContent}>×</button>
+        <button onClick={ok} className="ok">确定</button>
+        <button onClick={inputContent} className="zero">0</button>
+        <button onClick={inputContent}>.</button>
+        <button onClick={inputContent}>÷</button>
       </div>
     </NumberPadSection>
-  )
-}
+  );
+};
 export {NumberPad};
