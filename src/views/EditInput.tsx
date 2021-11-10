@@ -28,7 +28,7 @@ const DateSection = styled.section`
 type Props = {
   name: string, iconName: string, inputType: string, placeHolder?: string
 }
-const EditInput: (props: Props) => JSX.Element = (props: Props) => {
+const EditInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState('')
   const refInput = useRef<HTMLInputElement>(null)
   const onBlur = () => {
