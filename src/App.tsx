@@ -4,6 +4,7 @@ import Label from './views/Label';
 import Statistics from './views/Statistics';
 import Money from './views/Money';
 import NoMatch from './views/NoMatch';
+import {EditLabel} from './views/EditLabel';
 import styled from 'styled-components';
 
 const AppWrapper = styled.div`
@@ -15,15 +16,19 @@ function App() {
     <AppWrapper>
       <Router>
         <Switch>
-          <Route path="/tags">
+          <Route exact path="/tags">
             <Label/>
           </Route>
-          <Route path="/money">
+          <Route exact path="/tags/:tag">
+            <EditLabel/>
+          </Route>
+          <Route exact path="/money">
             <Money/>
           </Route>
-          <Route path="/statistics">
+          <Route exact path="/statistics">
             <Statistics/>
           </Route>
+
           <Redirect exact from="/" to="/money"/>
           <Route path="*">
             <NoMatch/>
