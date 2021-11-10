@@ -1,10 +1,10 @@
 import Layout from '../components/Layout';
-import React, {useState} from 'react';
+import React from 'react';
 import {useTags} from './useTags';
 import Icon from '../components/Icons';
 import styled from 'styled-components';
 import {Link,useRouteMatch} from 'react-router-dom';
-import {CreateTag} from '../components/CreateTag';
+import {Button} from '../components/Button';
 
 const TagList = styled.ol`
   padding:0 0 16px 16px;
@@ -26,19 +26,9 @@ const TagList = styled.ol`
     
   }
 `;
-const Button = styled.button`
-  background: #F4C738;
-  width: 100px;
-  height: 28px;
-  line-height: 28px;
-  border-radius: 14px;
-  margin: 10px auto;
-  color: #fff;
-  display: block;
-`
+
 const Label = () => {
-  const {tags, setTags} = useTags();
-  const [visible, setVisible] = useState(false)
+  const {tags} = useTags();
   const match = useRouteMatch();
   return (
     <Layout>
@@ -52,7 +42,7 @@ const Label = () => {
           </li>
         ))}
       </TagList>
-      <Button>新增标签</Button>
+      <Button name="新增标签" />
       {/*<CreateTag value={visible} onChange={trueOrFalse => setVisible(trueOrFalse)}/>*/}
     </Layout>
   );

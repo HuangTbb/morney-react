@@ -5,7 +5,7 @@ import React, {useRef} from 'react';
 const DateSection = styled.section`
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
   padding: 0 16px;
-
+  background: #fff;
   > label {
     display: flex;
     align-items: center;
