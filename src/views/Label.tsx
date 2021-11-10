@@ -44,9 +44,9 @@ const Label = () => {
     <Layout>
       <TagList>
         {tags.map(tag => (
-          <li key={tag}>
-            <Link to={`${match.url}/${tag}`}>
-              <span className="oneLine">{tag}</span>
+          <li key={tag.id}>
+            <Link to={`${match.url}/${tag.name}`}>
+              <span className="oneLine">{tag.name}</span>
               <Icon name="detail"/>
             </Link>
           </li>

@@ -12,17 +12,18 @@ const MyLayout = styled(Layout)`
 `;
 
 type Category = '-' | '+'
-function Money(){
+
+function Money() {
   const [selected, setSelected] = useState({
     tags: [] as string[],
     note: '',
     date: '',
     category: '-' as Category,
     amount: '0'
-  })
+  });
   const onChange = (obj: Partial<typeof selected>) => {
-    setSelected({...selected,...obj})
-  }
+    setSelected({...selected,...obj });
+  };
   return (
     <MyLayout>
       <Tags value={selected.tags}
@@ -36,8 +37,9 @@ function Money(){
       <Type value={selected.category}
             onChange={category => onChange({category})}/>
       <NumberPad value={selected.amount}
-                  onChange={amount => onChange({amount})}/>
+                 onChange={amount => onChange({amount})}/>
     </MyLayout>
   );
 }
+
 export default Money;
