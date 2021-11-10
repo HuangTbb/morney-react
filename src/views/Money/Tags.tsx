@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
+import {useTags} from '../useTags';
 
 const TagsSection = styled.section`
   padding: 10px 0;
@@ -31,7 +32,7 @@ type Props = {
   onChange: (selected: string[]) => void;
 }
 const Tags: React.FC<Props> = (props: Props) => {
-  const [tags] = useState<string[]>(['衣','食','住','行'])
+  const {tags} = useTags()
   const selectedTags = props.value;
   const onToggleTag = (tag: string) => {
     const index = selectedTags.indexOf(tag)
