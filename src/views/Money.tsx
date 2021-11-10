@@ -15,7 +15,7 @@ type Category = '-' | '+'
 
 function Money() {
   const [selected, setSelected] = useState({
-    tags: [] as string[],
+    tagIds: [] as number[],
     note: '',
     date: '',
     category: '-' as Category,
@@ -26,8 +26,8 @@ function Money() {
   };
   return (
     <MyLayout>
-      <Tags value={selected.tags}
-            onChange={tags => onChange({tags})}/>
+      <Tags value={selected.tagIds}
+            onChange={tagIds => onChange({tagIds})}/>
       <EditInput name="备注" iconName="remarks" inputType="text" placeHolder="请输入备注"
                  value={selected.note}
                  onChange={note => onChange({note})}/>
