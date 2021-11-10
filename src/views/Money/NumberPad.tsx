@@ -3,10 +3,15 @@ import NumberPadSection from './NumberPad/NumberPadSection';
 import {countSum} from './NumberPad/countSum';
 import {containSign} from './NumberPad/containSign';
 
-const NumberPad: React.FC = () => {
-  const [output, setOutput] = useState('0');
-  const [outputSum, setOutputSum] = useState('0');
+type Props = {
+  value: string,
+  onChange: (value: string) => void
+}
 
+const NumberPad: React.FC<Props> = (props:Props) => {
+  const [output, setOutput] = useState('0');
+  // const [outputSum, setOutputSum] = useState('0');
+  const outputSum = props.value
   function inputContent(event: React.MouseEvent) {
     const input = (event.target as HTMLButtonElement).textContent as string;
     const eachNum = output.split(/[- |+|×|÷]/g);
@@ -14,7 +19,7 @@ const NumberPad: React.FC = () => {
     if (output === '0') {
       if ('0123456789'.indexOf(input) >= 0) {
         setOutput(input);
-        setOutputSum(input);
+        props.onChange(input);
         return;
       } else if (containSign(input) >= 0) { return; }
     }
@@ -45,26 +50,25 @@ const NumberPad: React.FC = () => {
       }
     }
     setOutput(output + input);
-    setOutputSum(countSum(output + input));
+    props.onChange(countSum(output + input));
   }
 
   function remove() {
     if (output.length === 1) {
       setOutput('0');
-      setOutputSum('0');
+      props.onChange('0');
     } else {
       setOutput(output.slice(0, -1));
-      setOutputSum(countSum(output.slice(0, -1)));
+      props.onChange(countSum(output.slice(0, -1)));
     }
   }
 
   function clear() {
     setOutput('0');
-    setOutputSum('0');
+    props.onChange('0');
   }
 
   function ok() {
-    // TODO
   }
 
   return (

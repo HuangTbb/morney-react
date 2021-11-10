@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Icon from '../components/Icons';
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 
 const DateSection = styled.section`
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
@@ -26,14 +26,19 @@ const DateSection = styled.section`
   }
 `;
 type Props = {
-  name: string, iconName: string, inputType: string, placeHolder?: string
+  name: string;
+  iconName: string;
+  inputType: string;
+  placeHolder?: string;
+  value: string;
+  onChange: (value: string) => void;
 }
 const EditInput: React.FC<Props> = (props: Props) => {
-  const [value, setValue] = useState('')
+  const value = props.value
   const refInput = useRef<HTMLInputElement>(null)
   const onBlur = () => {
     if(refInput.current !== null){
-      setValue(refInput.current.value)
+      props.onChange(refInput.current.value)
     }
   }
   return (

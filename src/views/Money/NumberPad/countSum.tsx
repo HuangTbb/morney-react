@@ -5,10 +5,11 @@ function countSum(output: string) {
   const signArray = output.split(/[\d.]+/);
   let sum = 0;
   let n = 0;
-  signArray.map((x, index) => {
-    if (containSign(x) < 0 || x === '') {
-      signArray.splice(index, 1);
-    }
+  signArray.map((x: string, index: number) => {
+      if (containSign(x) < 0 || x === '') {
+        signArray.splice(index, 1);
+      }
+      return signArray;
   });
   for (let i = 0; i < eachNums.length; i++) {
     const num = parseFloat(eachNums[i]);
@@ -30,4 +31,5 @@ function countSum(output: string) {
   }
   return (Math.floor(sum * 100) / 100).toString();
 }
-export {countSum}
+
+export {countSum};
