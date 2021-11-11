@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import {useTags} from '../useTags';
+import {useTags} from '../../components/useTags';
 
 const TagsSection = styled.section`
   padding: 10px 0;
