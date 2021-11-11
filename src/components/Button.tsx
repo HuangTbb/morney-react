@@ -11,7 +11,7 @@ const ButtonLabel = styled.button`
   display: block;
 `
 type Props = {
-  name: string
+  name: string;
 }
 
 const Button = (props: Props) => {
