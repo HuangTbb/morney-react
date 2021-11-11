@@ -37,7 +37,7 @@ const Label = () => {
       <TagList>
         {tags.map(tag => (
           <li key={tag.id}>
-            <Link to={`${match.url}/${tag.name}`}>
+            <Link to={`${match.url}/${tag.id}`}>
               <span className="oneLine">{tag.name}</span>
               <Icon name="detail"/>
             </Link>

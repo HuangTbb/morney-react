@@ -3,6 +3,8 @@ import {EditInput} from './EditInput';
 import {useState} from 'react';
 import {GotoBack} from '../components/GotoBack';
 import {Button} from '../components/Button';
+import {useParams} from 'react-router-dom'
+import {useTags} from '../components/useTags';
 
 const EditLabelDiv = styled.div`
   background: #f5f5f5;
@@ -20,8 +22,14 @@ const EditLabelDiv = styled.div`
     margin: 40px 0;
   }
 `
-function EditLabel() {
+type Params = {
+  id: string
+}
+const EditLabel = () => {
   const [newName, setNewName] = useState("")
+  const {tags} = useTags();
+  let {id} = useParams<Params>();
+  const tag = tags.filter(tag => tag.id === parseInt(id))[0]
   return (
     <EditLabelDiv>
       <div className="back">
