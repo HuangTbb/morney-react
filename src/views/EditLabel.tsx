@@ -27,9 +27,9 @@ type Params = {
 }
 const EditLabel = () => {
   const [newName, setNewName] = useState("")
-  const {tags} = useTags();
+  const {findTag} = useTags();
   let {id} = useParams<Params>();
-  const tag = tags.filter(tag => tag.id === parseInt(id))[0]
+  const tag = findTag(parseInt(id))
   return (
     <EditLabelDiv>
       <div className="back">
@@ -38,13 +38,12 @@ const EditLabel = () => {
       </div>
       <EditInput name="标签名" iconName="labelname" inputType="text"
                  placeHolder="请输入标签名"
-                 value={newName} onChange={()=>setNewName(newName)} />
-    <div className="editButtons">
-      <Button name="修改"/>
-      <Button name="删除"/>
-    </div>
+                 value={tag.name} onChange={()=>setNewName(newName)} />
+      <div className="editButtons">
+        <Button name="修改"/>
+        <Button name="删除"/>
+      </div>
     </EditLabelDiv>
-
   )
 }
 export {EditLabel}
