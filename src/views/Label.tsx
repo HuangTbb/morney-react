@@ -1,10 +1,12 @@
 import Layout from '../components/Layout';
-import React from 'react';
-import {useTags} from './useTags';
+import React, {useState} from 'react';
+import {useTags} from '../components/useTags';
 import Icon from '../components/Icons';
 import styled from 'styled-components';
 import {Link,useRouteMatch} from 'react-router-dom';
 import {Button} from '../components/Button';
+import {CreateTag} from 'components/CreateTag';
+import {CreateId} from 'lib/CreateId';
 
 const TagList = styled.ol`
   padding:0 0 16px 16px;
@@ -23,13 +25,13 @@ const TagList = styled.ol`
         color: #666;
       }
     }
-    
   }
 `;
 
 const Label = () => {
-  const {tags} = useTags();
+  const {tags,setTags} = useTags();
   const match = useRouteMatch();
+  const [visible,setVisible] = useState(false)
   return (
     <Layout>
       <TagList>
@@ -42,9 +44,14 @@ const Label = () => {
           </li>
         ))}
       </TagList>
-      <Button name="新增标签" />
-      {/*<CreateTag value={visible} onChange={trueOrFalse => setVisible(trueOrFalse)}/>*/}
+      <div onClick={()=>setVisible(true)}>
+        <Button name="新增标签"/>
+      </div>
+     <CreateTag value={visible}
+                onChange={visible => setVisible(visible)}
+                tagList={tags}
+                onChangeTagList={newtag => setTags([...tags,{id:CreateId(),name: newtag}])}/>
     </Layout>
-  );
-};
+  )
+}
 export default Label;

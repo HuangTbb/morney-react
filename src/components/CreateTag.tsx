@@ -54,21 +54,36 @@ const CreateTagDiv = styled.div`
     }
   }
 `
-
 type Props = {
   value: boolean;
-  onChange: (value: boolean) => void
+  onChange: (visible: boolean) => void;
+  tagList: {id: number, name: string}[];
+  onChangeTagList: (newtag: string) => void
 }
-const CreateTag: React.FC<Props> = (props: Props) => {
-  const refInput = useRef<HTMLInputElement>(null)
 
+const CreateTag: React.FC<Props> = (props:Props) => {
+  const refInput = useRef<HTMLInputElement>(null)
+  const onAddTags= () => {
+    const newTag = refInput.current!.value
+    const tagNames = props.tagList.map(tag => tag.name)
+    if(tagNames.indexOf(newTag) >= 0){
+      window.alert('标签名已存在！')
+    }else if(newTag === '' || newTag === ' '){
+      window.alert('标签名不能为空！')
+    }else if(newTag.length > 30){
+      window.alert('标签名不能超过30个字符！')
+    }else{
+      props.onChangeTagList(newTag.trim())
+      props.onChange(false)
+    }
+    refInput.current!.value = ''
+  }
   return (
-    <CreateTagDiv>
+    <CreateTagDiv className={props.value?'':'hide'}>
       <p>标签名</p>
-      <input type="text" placeholder="请输入标签名"
-             ref={refInput}/>
-        <button className="cancel">取消</button>
-        <button className="define">确定</button>
+      <input type="text" placeholder="请输入标签名" ref={refInput}/>
+      <button className="cancel" onClick={()=>props.onChange(false)}>取消</button>
+      <button className="define" onClick={()=>onAddTags()}>确定</button>
     </CreateTagDiv>
   )
 }
