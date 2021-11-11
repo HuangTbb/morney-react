@@ -28,10 +28,10 @@ function Money() {
     <MyLayout>
       <Tags value={selected.tagIds}
             onChange={tagIds => onChange({tagIds})}/>
-      <EditInput name="备注" iconName="remarks" inputType="text" placeHolder="请输入备注"
+      <EditInput name="备注" iconName="remarks" type="text" placeholder="请输入备注"
                  value={selected.note}
                  onChange={note => onChange({note})}/>
-      <EditInput name="日期" iconName="date" inputType="date"
+      <EditInput name="日期" iconName="date" type="date"
                  value={selected.date}
                  onChange={date => onChange({date})}/>
       <Type value={selected.category}
@@ -41,5 +41,4 @@ function Money() {
     </MyLayout>
   );
 }
-
 export default Money;

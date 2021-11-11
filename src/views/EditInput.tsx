@@ -28,13 +28,12 @@ const DateSection = styled.section`
 type Props = {
   name: string;
   iconName: string;
-  inputType: string;
-  placeHolder?: string;
+  type: string;
+  placeholder?: string;
   value: string;
   onChange: (value: string) => void;
 }
 const EditInput: React.FC<Props> = (props: Props) => {
-  const value = props.value
   const refInput = useRef<HTMLInputElement>(null)
   const onBlur = () => {
     if(refInput.current !== null){
@@ -47,9 +46,9 @@ const EditInput: React.FC<Props> = (props: Props) => {
         <Icon name={props.iconName}/>
         <p>{props.name}</p>
         <input
-          type={props.inputType}
-          placeholder={props.placeHolder || ''}
-          defaultValue={value}
+          type={props.type}
+          placeholder={props.placeholder}
+          defaultValue={props.value}
           onBlur={onBlur}
           ref={refInput}
         />

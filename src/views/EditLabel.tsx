@@ -36,8 +36,8 @@ const EditLabel = () => {
         <GotoBack/>
         <span>编辑标签</span>
       </div>
-      <EditInput name="标签名" iconName="labelname" inputType="text"
-                 placeHolder="请输入标签名"
+      <EditInput name="标签名" iconName="labelname" type="text"
+                 placeholder="请输入标签名"
                  value={tag.name} onChange={()=>setNewName(newName)} />
       <div className="editButtons">
         <Button name="修改"/>
