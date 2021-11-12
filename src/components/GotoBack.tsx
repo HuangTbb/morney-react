@@ -10,12 +10,12 @@ const IconDiv = styled.div`
   }
 `
 const GotoBack = () => {
-  const onClick= () => {
+  const OnGoBack= () => {
     useHistory().goBack()
   }
   return (
     <IconDiv>
-      <Icon name="back" onClick={()=>onClick()}/>
+      <Icon name="back" onClick={()=>OnGoBack()}/>
     </IconDiv>
   )
 }

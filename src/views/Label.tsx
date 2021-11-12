@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import {Link,useRouteMatch} from 'react-router-dom';
 import {Button} from '../components/Button';
 import {CreateTag} from 'components/CreateTag';
-import {CreateId} from 'lib/CreateId';
 
 const TagList = styled.ol`
   padding:0 0 16px 16px;
@@ -29,7 +28,7 @@ const TagList = styled.ol`
 `;
 
 const Label = () => {
-  const {tags,setTags} = useTags();
+  const {tags,addTag} = useTags();
   const match = useRouteMatch();
   const [visible,setVisible] = useState(false)
   return (
@@ -50,7 +49,7 @@ const Label = () => {
      <CreateTag value={visible}
                 onChange={visible => setVisible(visible)}
                 tagList={tags}
-                onChangeTagList={newtag => setTags([...tags,{id:CreateId(),name: newtag}])}/>
+                onChangeTagList={newtag => addTag(newtag)}/>
     </Layout>
   )
 }

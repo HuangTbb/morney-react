@@ -1,14 +1,26 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {CreateId} from 'lib/CreateId';
+import {useUpdate} from '../hooks/UseUpdate';
 
-const defaultTags = [
-  {id: CreateId(), name: '衣'},
-  {id: CreateId(), name: '食'},
-  {id: CreateId(), name: '住'},
-  {id: CreateId(), name: '行'}
-];
+
 const useTags = () => {
-  const [tags, setTags] = useState<{ id: number; name: string }[]>(defaultTags);
+  const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
+  useEffect(()=>{
+    let localTags = JSON.parse(window.localStorage.getItem('tags')|| '[]')
+    if(localTags.length === 0){
+      localTags = [
+        {id: CreateId(), name: '衣'},
+        {id: CreateId(), name: '食'},
+        {id: CreateId(), name: '住'},
+        {id: CreateId(), name: '行'}
+      ]
+    }
+    setTags(localTags)
+  },[])
+  useUpdate(()=> {
+    window.localStorage.setItem('tags', JSON.stringify(tags))
+  }, [tags])
+
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0];
   const findTagIndex = (id: number) => {
     let result = -1;
@@ -26,6 +38,9 @@ const useTags = () => {
   const deleteTag = (id: number) => {
     setTags(tags.filter(tag => tag.id !== id))
   }
-  return {tags, setTags, findTag, updateTag, findTagIndex,deleteTag};
+  const addTag = (name: string) => {
+    setTags([...tags,{id:CreateId(),name: name}])
+  }
+  return {tags, setTags, addTag, findTag, updateTag, findTagIndex,deleteTag};
 };
 export {useTags};
