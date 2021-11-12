@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {GotoBack} from '../components/GotoBack';
 import {Button} from '../components/Button';
 import {useParams} from 'react-router-dom';
-import {useTags} from '../components/useTags';
+import {useTags} from '../hooks/useTags';
 
 const EditLabelDiv = styled.div`
   background: #f5f5f5;

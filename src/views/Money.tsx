@@ -5,6 +5,7 @@ import {Type} from './Money/Type';
 import {Tags} from './Money/Tags';
 import {NumberPad} from './Money/NumberPad';
 import {EditInput} from './EditInput';
+import {useRecords} from '../hooks/useRecords';
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -12,20 +13,26 @@ const MyLayout = styled(Layout)`
 `;
 
 type Category = '-' | '+'
+const defaultFormData = {
+  tagIds: [] as number[],
+    note: '',
+  date: '',
+  category: '-' as Category,
+  amount: '0'
+}
 
 function Money() {
-  const [selected, setSelected] = useState({
-    tagIds: [] as number[],
-    note: '',
-    date: '',
-    category: '-' as Category,
-    amount: '0'
-  });
+  const {addRecord} = useRecords()
+  const [selected, setSelected] = useState(defaultFormData);
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({...selected,...obj });
   };
+  const Submit = () => {
+    addRecord(selected)
+  }
   return (
     <MyLayout>
+      {JSON.stringify(selected)}
       <Tags value={selected.tagIds}
             onChange={tagIds => onChange({tagIds})}/>
       <EditInput name="备注" iconName="remarks" type="text" placeholder="请输入备注"
@@ -37,7 +44,8 @@ function Money() {
       <Type value={selected.category}
             onChange={category => onChange({category})}/>
       <NumberPad value={selected.amount}
-                 onChange={amount => onChange({amount})}/>
+                 onChange={amount => onChange({amount})}
+                 onOk={()=>Submit()}/>
     </MyLayout>
   );
 }

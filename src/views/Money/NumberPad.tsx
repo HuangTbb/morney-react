@@ -6,6 +6,7 @@ import {containSign} from './NumberPad/containSign';
 type Props = {
   value: string,
   onChange: (value: string) => void
+  onOk : () => void;
 }
 
 const NumberPad: React.FC<Props> = (props:Props) => {
@@ -59,9 +60,6 @@ const NumberPad: React.FC<Props> = (props:Props) => {
     props.onChange('0');
   }
 
-  function ok() {
-  }
-
   return (
     <NumberPadSection>
       <div className="outputSum">{outputSum}</div>
@@ -81,7 +79,7 @@ const NumberPad: React.FC<Props> = (props:Props) => {
         <button onClick={inputContent}>8</button>
         <button onClick={inputContent}>9</button>
         <button onClick={inputContent}>×</button>
-        <button onClick={ok} className="ok">确定</button>
+        <button onClick={props.onOk} className="ok">确定</button>
         <button onClick={inputContent} className="zero">0</button>
         <button onClick={inputContent}>.</button>
         <button onClick={inputContent}>÷</button>

@@ -1,6 +1,6 @@
 import Layout from '../components/Layout';
 import React, {useState} from 'react';
-import {useTags} from '../components/useTags';
+import {useTags} from '../hooks/useTags';
 import Icon from '../components/Icons';
 import styled from 'styled-components';
 import {Link,useRouteMatch} from 'react-router-dom';
