@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import {AlertItem} from './AlertItem';
 
 const CreateTagDiv = styled.div`
   position: absolute;
@@ -63,15 +64,25 @@ type Props = {
 
 const CreateTag: React.FC<Props> = (props:Props) => {
   const refInput = useRef<HTMLInputElement>(null)
+  const [visible,setVisible] = useState(false)
+  const [message,setMessage] = useState('')
+  const setAlert = (alertmessage: string) => {
+    setVisible(true)
+    setMessage(alertmessage)
+    setTimeout(()=>{
+      setVisible(false)
+      setMessage("")
+    }, 1600)
+  }
   const onAddTags= () => {
     const newTag = refInput.current!.value
     const tagNames = props.tagList.map(tag => tag.name)
     if(tagNames.indexOf(newTag) >= 0){
-      window.alert('标签名已存在！')
+     setAlert("标签名已存在！")
     }else if(newTag === '' || newTag === ' '){
-      window.alert('标签名不能为空！')
+      setAlert('标签名不能为空！')
     }else if(newTag.length > 30){
-      window.alert('标签名不能超过30个字符！')
+      setAlert('标签名不能超过30个字符！')
     }else{
       props.onChangeTagList(newTag.trim())
       props.onChange(false)
@@ -84,6 +95,7 @@ const CreateTag: React.FC<Props> = (props:Props) => {
       <input type="text" placeholder="请输入标签名" ref={refInput}/>
       <button className="cancel" onClick={()=>props.onChange(false)}>取消</button>
       <button className="define" onClick={()=>onAddTags()}>确定</button>
+      <AlertItem visible={visible} message={message}/>
     </CreateTagDiv>
   )
 }

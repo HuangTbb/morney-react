@@ -43,9 +43,7 @@ const Label = () => {
           </li>
         ))}
       </TagList>
-      <div onClick={()=>setVisible(true)}>
-        <Button name="新增标签"/>
-      </div>
+      <Button name="新增标签" onClick={()=>setVisible(true)}/>
      <CreateTag value={visible}
                 onChange={visible => setVisible(visible)}
                 tagList={tags}

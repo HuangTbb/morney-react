@@ -17,6 +17,7 @@ export const useRecords = () => {
   }, [records])
   const addRecord = (record: RecordItem) => {
     setRecords([...records, record])
+    return true
   }
   return {records, addRecord}
 }

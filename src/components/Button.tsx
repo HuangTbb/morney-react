@@ -12,11 +12,12 @@ const ButtonLabel = styled.button`
 `
 type Props = {
   name: string;
-}
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button = (props: Props) => {
+  const {name,children, ...rest} = props
   return (
-    <ButtonLabel>{props.name}</ButtonLabel>
+    <ButtonLabel {...rest}>{props.name}</ButtonLabel>
   )
 }
 export {Button}

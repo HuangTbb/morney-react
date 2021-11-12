@@ -6,6 +6,7 @@ import {Tags} from './Money/Tags';
 import {NumberPad} from './Money/NumberPad';
 import {EditInput} from './EditInput';
 import {useRecords} from '../hooks/useRecords';
+import {AlertItem} from '../components/AlertItem';
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -15,8 +16,8 @@ const MyLayout = styled(Layout)`
 type Category = '-' | '+'
 const defaultFormData = {
   tagIds: [] as number[],
-    note: '',
-  date: '',
+  note: "",
+  date: "",
   category: '-' as Category,
   amount: '0'
 }
@@ -28,7 +29,10 @@ function Money() {
     setSelected({...selected,...obj });
   };
   const Submit = () => {
-    addRecord(selected)
+    if(addRecord(selected)){
+      alert('添加成功')
+      setSelected(defaultFormData)
+    }
   }
   return (
     <MyLayout>
