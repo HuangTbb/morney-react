@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom';
 import Icon from './Icons';
 import styled from 'styled-components';
+import {useHistory} from 'react-router-dom'
 const IconDiv = styled.div`
   background: #fff;
   > .icon{
@@ -9,13 +9,14 @@ const IconDiv = styled.div`
     margin: 8px;
   }
 `
-const GotoBack = (props: any) => {
+const GotoBack = () => {
+  const onClick= () => {
+    useHistory().goBack()
+  }
   return (
-    <Link to={``}>
-      <IconDiv>
-        <Icon name="back"/>
-      </IconDiv>
-    </Link>
+    <IconDiv>
+      <Icon name="back" onClick={()=>onClick()}/>
+    </IconDiv>
   )
 }
 export {GotoBack}
