@@ -78,11 +78,13 @@ const CreateTag: React.FC<Props> = (props:Props) => {
     const newTag = refInput.current!.value
     const tagNames = props.tagList.map(tag => tag.name)
     if(tagNames.indexOf(newTag) >= 0){
-     setAlert("标签名已存在！")
-    }else if(newTag === '' || newTag === ' '){
-      setAlert('标签名不能为空！')
+     setAlert("标签名已存在")
+    }else if(newTag === ''){
+      setAlert('标签名不能为空')
+    }else if(newTag.indexOf(' ')>=0){
+      setAlert("标签名不能含有空格")
     }else if(newTag.length > 30){
-      setAlert('标签名不能超过30个字符！')
+      setAlert('标签名不能超过30个字符')
     }else{
       props.onChangeTagList(newTag.trim())
       props.onChange(false)

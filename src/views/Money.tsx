@@ -6,7 +6,6 @@ import {Tags} from './Money/Tags';
 import {NumberPad} from './Money/NumberPad';
 import {EditInput} from './EditInput';
 import {useRecords} from '../hooks/useRecords';
-import {AlertItem} from '../components/AlertItem';
 
 const MyLayout = styled(Layout)`
   display: flex;
