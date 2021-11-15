@@ -49,9 +49,9 @@ function Money() {
       }
     }
   }
+
   return (
     <MyLayout>
-      {JSON.stringify(selected)}
       <Tags value={selected.tags}
             onChange={tags => onChange({tags})}/>
       <EditInput name="备注" iconName="remarks" type="text" placeholder="请输入备注"

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useUpdate} from './UseUpdate';
-type RecordItem = {
+export type RecordItem = {
   tags: string[];
   note: string;
   date: string;
