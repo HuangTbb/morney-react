@@ -6,7 +6,7 @@ import {Button} from '../components/Button';
 import {useParams} from 'react-router-dom';
 import {useTags} from '../hooks/useTags';
 import {AlertItem} from '../components/AlertItem';
-
+import {Link} from 'react-router-dom'
 const EditLabelDiv = styled.div`
   background: #f5f5f5;
   height: 100vh;
@@ -25,6 +25,11 @@ const EditLabelDiv = styled.div`
       justify-content: space-around;
       margin: 40px 0;
     }
+  }
+  > .noExist{
+    text-align: center;
+    margin-top: 100px;
+    color: #ccc;
   }
 `;
 type Params = {
@@ -46,6 +51,7 @@ const EditLabel = () => {
     }, 1600);
   };
   useEffect(()=> {setNewName(tag.name);},[])
+
   const tagContent = (tag: { id: number; name: string }) => (
     <div className="changeTag">
       <EditInput name="标签名" iconName="labelname" type="text"
@@ -76,10 +82,12 @@ const EditLabel = () => {
   return (
     <EditLabelDiv>
       <div className="back">
-        <GotoBack/>
+        <Link to="/tags" replace>
+          <GotoBack/>
+        </Link>
         <span>编辑标签</span>
       </div>
-      {tag ? tagContent(tag) : <div>tag不存在</div>}
+      {tag ? tagContent(tag) : <h3 className="noExist">标签不存在</h3>}
       <AlertItem visible={visible} message={message}/>
     </EditLabelDiv>
   );
