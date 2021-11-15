@@ -7,7 +7,7 @@ const TagsSection = styled.section`
   color: #fff;
   flex-grow: 1;
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
-
+  overflow: auto;
   > ul {
     display: flex;
     flex-wrap: wrap;

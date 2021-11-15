@@ -106,7 +106,7 @@ const Statistics = () => {
   }
   const categoryTotal = ()=> {
     let total = 0
-    array.map(item=> item[1].map(t=>{
+    array.forEach(item=> item[1].forEach(t=>{
       total+=parseFloat(t.amount)
     }))
     return total
@@ -147,7 +147,7 @@ const Statistics = () => {
       <MorneyList>
         <li className="message">
           <div className="totalMoney">
-            <Icon name="countin"/>
+            <Icon name={selectType === '-'? 'countout':'countin'}/>
             <span>{categoryTotal()}</span>
           </div>
           <div className="showEchart">
