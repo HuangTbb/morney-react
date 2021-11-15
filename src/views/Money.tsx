@@ -6,6 +6,7 @@ import {Tags} from './Money/Tags';
 import {NumberPad} from './Money/NumberPad';
 import {EditInput} from './EditInput';
 import {useRecords} from '../hooks/useRecords';
+import {AlertItem} from '../components/AlertItem';
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -14,9 +15,9 @@ const MyLayout = styled(Layout)`
 
 type Category = '-' | '+'
 const defaultFormData = {
-  tagIds: [] as number[],
+  tags: [] as string[],
   note: "",
-  date: "",
+  date: (new Date()).toISOString().split('T')[0],
   category: '-' as Category,
   amount: '0'
 }
@@ -24,20 +25,35 @@ const defaultFormData = {
 function Money() {
   const {addRecord} = useRecords()
   const [selected, setSelected] = useState(defaultFormData);
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState('');
+  const setAlert = (alertmessage: string) => {
+    setVisible(true);
+    setMessage(alertmessage);
+    setTimeout(() => {
+      setVisible(false);
+      setMessage('');
+    }, 1600);
+  };
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({...selected,...obj });
   };
   const Submit = () => {
-    if(addRecord(selected)){
-      alert('添加成功')
-      setSelected(defaultFormData)
+    if(selected.amount === '0'){
+      setAlert('请输入金额')
+    }else if(selected.tags.length===0){
+      setAlert('请至少选择一个标签')
+    }else{
+      if(addRecord(selected)){
+        setAlert('添加成功')
+      }
     }
   }
   return (
     <MyLayout>
       {JSON.stringify(selected)}
-      <Tags value={selected.tagIds}
-            onChange={tagIds => onChange({tagIds})}/>
+      <Tags value={selected.tags}
+            onChange={tags => onChange({tags})}/>
       <EditInput name="备注" iconName="remarks" type="text" placeholder="请输入备注"
                  value={selected.note}
                  onChange={note => onChange({note})}/>
@@ -49,6 +65,7 @@ function Money() {
       <NumberPad value={selected.amount}
                  onChange={amount => onChange({amount})}
                  onOk={()=>Submit()}/>
+      <AlertItem visible={visible} message={message}/>
     </MyLayout>
   );
 }

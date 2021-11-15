@@ -28,25 +28,25 @@ const TagsSection = styled.section`
 `;
 
 type Props = {
-  value: number[];
-  onChange: (selected: number[]) => void;
+  value: string[];
+  onChange: (selected: string[]) => void;
 }
 const Tags: React.FC<Props> = (props: Props) => {
   const {tags} = useTags()
-  const selectedTagIds = props.value;
-  const onToggleTag = (tagId: number) => {
-    const index = selectedTagIds.indexOf(tagId)
+  const selectedTags = props.value;
+  const onToggleTag = (tag: string) => {
+    const index = selectedTags.indexOf(tag)
     if(index>=0){
-      props.onChange(selectedTagIds.filter(t => t !== tagId))
+      props.onChange(selectedTags.filter(t => t !== tag))
     }else{
-      props.onChange([...selectedTagIds, tagId])
+      props.onChange([...selectedTags, tag])
     }
   }
   return (
     <TagsSection>
       <ul>
         {tags.map(tag =>
-          <li key={tag.id} onClick={()=>{onToggleTag(tag.id)}} className={selectedTagIds.indexOf(tag.id)>=0 ? 'selected' : ''}>{tag.name}</li>
+          <li key={tag.id} onClick={()=>{onToggleTag(tag.name)}} className={selectedTags.indexOf(tag.name)>=0 ? 'selected' : ''}>{tag.name}</li>
         )}
       </ul>
     </TagsSection>
