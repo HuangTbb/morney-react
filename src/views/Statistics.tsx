@@ -98,6 +98,19 @@ const Statistics = () => {
     if (a[0] < b[0]) return 1;
     return 0;
   });
+  const dayTotal = (records: RecordItem[]) => {
+    let total = 0
+    records.forEach(t => {
+      total += parseFloat(t.amount)})
+    return total
+  }
+  const categoryTotal = ()=> {
+    let total = 0
+    array.map(item=> item[1].map(t=>{
+      total+=parseFloat(t.amount)
+    }))
+    return total
+  }
   const tagString = (tag: string[]) => {
     return tag.join('，');
   };
@@ -135,7 +148,7 @@ const Statistics = () => {
         <li className="message">
           <div className="totalMoney">
             <Icon name="countin"/>
-            <span>100</span>
+            <span>{categoryTotal()}</span>
           </div>
           <div className="showEchart">
             <Icon name="chart"/>
@@ -144,7 +157,7 @@ const Statistics = () => {
         {array.map(([date, records], key) => {
           return (
             <li className="recordsBox" key={key}>
-              <h3>{beautifulTitle(date)}<span>￥123</span></h3>
+              <h3>{beautifulTitle(date)}<span>￥{dayTotal(records)}</span></h3>
               <ol>
                 {records.map((r, key) =>
                   <li className="detailsList" key={key}>
