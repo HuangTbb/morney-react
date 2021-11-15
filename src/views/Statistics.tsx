@@ -85,13 +85,12 @@ const Statistics = () => {
   const {records} = useRecords();
   const selectedRecords = records.filter(r => r.category === selectType);
   const hash: { [K: string]: RecordItem[] } = {};
-  selectedRecords.map(r => {
+  selectedRecords.forEach(r => {
     const key = r.date;
     if (!(key in hash)) {
       hash[key] = [];
     }
     hash[key].push(r);
-    return 1
   });
   const array = Object.entries(hash).sort((a, b) => {
     if (a[0] === b[0]) return 0;
