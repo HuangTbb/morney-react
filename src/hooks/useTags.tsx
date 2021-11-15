@@ -18,7 +18,7 @@ const useTags = () => {
   },[])
   useUpdate(()=> {
     window.localStorage.setItem('tags', JSON.stringify(tags))
-  }, [tags])
+  }, tags)
 
   const findTag = (id: number) => {
     const tags: {id: number,name: string}[] = JSON.parse(window.localStorage.getItem("tags")|| '[]')

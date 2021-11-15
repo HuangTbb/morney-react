@@ -50,7 +50,7 @@ const EditLabel = () => {
       setMessage('');
     }, 1600);
   };
-  useEffect(()=> {setNewName(tag.name);},[])
+  useEffect(()=> setNewName(tag.name),[]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const tagContent = (tag: { id: number; name: string }) => (
     <div className="changeTag">

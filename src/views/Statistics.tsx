@@ -82,25 +82,27 @@ const Statistics = () => {
   type Keys = keyof typeof categoryMap
   const [types] = useState<Keys[]>(['-', '+']);
   const [selectType, setSelectType] = useState<Keys>('-');
-  const {records} = useRecords()
-  const selectedRecords = records.filter(r=> r.category === selectType)
-  const hash: {[K: string]: RecordItem[]} = {}
-  selectedRecords.map(r=> {
-    const key = r.date
-    if(!(key in hash)){
-      hash[key] = []
+  const {records} = useRecords();
+  const selectedRecords = records.filter(r => r.category === selectType);
+  const hash: { [K: string]: RecordItem[] } = {};
+  selectedRecords.map(r => {
+    const key = r.date;
+    if (!(key in hash)) {
+      hash[key] = [];
     }
-    hash[key].push(r)
-  })
-  const array = Object.entries(hash).sort((a,b)=>{
-    if(a[0]===b[0]) return 0
-    if(a[0]>b[0]) return -1
-    if(a[0]<b[0]) return 1
-    return 0
-  })
-  const tagString = (tag:string[])=> {
-    return tag.join('，')
-  }
+    hash[key].push(r);
+    return 1
+  });
+  const array = Object.entries(hash).sort((a, b) => {
+    if (a[0] === b[0]) return 0;
+    if (a[0] > b[0]) return -1;
+    if (a[0] < b[0]) return 1;
+    return 0;
+  });
+  const tagString = (tag: string[]) => {
+    return tag.join('，');
+  };
+
   function beautifulTitle(title: string) {
     const day = dayjs(title);
     const now = dayjs();
@@ -116,6 +118,7 @@ const Statistics = () => {
       return day.format('YYYY-M-D');
     }
   }
+
   return (
     <Layout>
       <TypeTab>
@@ -139,12 +142,12 @@ const Statistics = () => {
             <Icon name="chart"/>
           </div>
         </li>
-        {array.map(([date,records],key)=> {
+        {array.map(([date, records], key) => {
           return (
             <li className="recordsBox" key={key}>
               <h3>{beautifulTitle(date)}<span>￥123</span></h3>
               <ol>
-                {records.map((r,key) =>
+                {records.map((r, key) =>
                   <li className="detailsList" key={key}>
                     <span className="tagSpan">{tagString(r.tags)}</span>
                     <span className="noteSpan">{r.note}</span>
@@ -153,7 +156,7 @@ const Statistics = () => {
                 )}
               </ol>
             </li>
-          )
+          );
         })}
       </MorneyList>
     </Layout>
