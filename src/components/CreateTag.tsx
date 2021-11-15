@@ -5,13 +5,13 @@ import {AlertItem} from './AlertItem';
 const CreateTagDiv = styled.div`
   position: absolute;
   left: 50%;
-  top: 100px;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%,-50%);
   background: #518C9E;
   border-radius: 20px;
   font-size: 18px;
   box-shadow: 2px -2px 2px rgb(81, 140, 158);
-  width: 80%;
+  width: 70%;
 
   &.hide {
     display: none;
