@@ -1,6 +1,5 @@
 import Icon from './Icons';
 import styled from 'styled-components';
-import {useHistory} from 'react-router-dom'
 const IconDiv = styled.div`
   background: #fff;
   > .icon{
@@ -10,12 +9,10 @@ const IconDiv = styled.div`
   }
 `
 const GotoBack = () => {
-  const OnGoBack= () => {
-    useHistory().goBack()
-  }
+
   return (
     <IconDiv>
-      <Icon name="back" onClick={()=>OnGoBack()}/>
+      <Icon name="back"/>
     </IconDiv>
   )
 }
