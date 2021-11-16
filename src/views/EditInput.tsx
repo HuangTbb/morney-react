@@ -9,7 +9,6 @@ const DateSection = styled.section`
   > label {
     display: flex;
     align-items: center;
-    
     > p {
       padding-right: 16px;
       white-space: nowrap;

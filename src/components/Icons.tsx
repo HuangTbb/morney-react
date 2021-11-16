@@ -9,8 +9,8 @@ type Props = {
   name: string
 } & React.SVGAttributes<SVGElement>
 const Svg = styled.svg`
-  width: 1.5em;
-  height: 1.5em;
+  width: 20px;
+  height: 20px;
 `
 const Icon = (props: Props) => {
   const {name,children, className, ...rest} = props

@@ -13,10 +13,15 @@ const EditLabelDiv = styled.div`
 
   > .back {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background: #ffffff;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 13px;
+    font-size: 16px;
+    > .hide {
+      opacity: 0;
+    }
   }
 
   > .changeTag {
@@ -29,7 +34,6 @@ const EditLabelDiv = styled.div`
   > .noExist{
     text-align: center;
     margin-top: 100px;
-    color: #ccc;
   }
 `;
 type Params = {
@@ -86,8 +90,9 @@ const EditLabel = () => {
           <GotoBack/>
         </Link>
         <span>编辑标签</span>
+        <div className="hide">编标签</div>
       </div>
-      {tag ? tagContent(tag) : <h3 className="noExist">标签不存在</h3>}
+      {tag ? tagContent(tag) : <h2 className="noExist">标签不存在</h2>}
       <AlertItem visible={visible} message={message}/>
     </EditLabelDiv>
   );

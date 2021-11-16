@@ -8,6 +8,7 @@ const TagsSection = styled.section`
   flex-grow: 1;
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
   overflow: auto;
+  flex-shrink: 1;
   > ul {
     display: flex;
     flex-wrap: wrap;
@@ -21,7 +22,7 @@ const TagsSection = styled.section`
       margin: 10px;
       background: #518C9E;
       &.selected{
-        background: #F4C738;
+        background: #ffa115;
       }
     }
   }

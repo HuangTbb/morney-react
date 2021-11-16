@@ -7,9 +7,8 @@ const TypeSection = styled.section`
   display: flex;
   justify-content: center;
   padding: 10px 0;
-
+ 
   > div {
-    font-size: 16px;
     flex-grow: 1;
     display: flex;
     justify-content: center;
@@ -19,18 +18,9 @@ const TypeSection = styled.section`
       margin-left: 5px;
     }
 
-    > .icon {
-      width: 1.3em;
-      height: 1.3em;
-    }
-
     &.selected {
-      color: #F4C738;
+      color: #ffa115;
       font-weight: bold;
-
-      > .icon {
-        color: #F4C738;
-      }
     }
   }
 `;

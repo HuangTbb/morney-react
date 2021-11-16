@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ButtonLabel = styled.button`
-  background: #F4C738;
+  background: #ffa115;
   width: 100px;
   height: 28px;
   line-height: 28px;

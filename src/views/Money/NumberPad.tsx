@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import NumberPadSection from './NumberPad/NumberPadSection';
+import NumberPadSection from './NumberPad/NumberPadSections';
 import {countSum} from './NumberPad/countSum';
 import {containSign} from './NumberPad/containSign';
 
@@ -69,12 +69,12 @@ const NumberPad: React.FC<Props> = (props:Props) => {
         <button onClick={inputContent}>2</button>
         <button onClick={inputContent}>3</button>
         <button onClick={inputContent}>+</button>
-        <button onClick={remove}>删除</button>
+        <button onClick={remove} className="remove">删除</button>
         <button onClick={inputContent}>4</button>
         <button onClick={inputContent}>5</button>
         <button onClick={inputContent}>6</button>
         <button onClick={inputContent}>-</button>
-        <button onClick={clear}>清空</button>
+        <button onClick={clear} className="clear">清空</button>
         <button onClick={inputContent}>7</button>
         <button onClick={inputContent}>8</button>
         <button onClick={inputContent}>9</button>
