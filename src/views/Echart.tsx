@@ -64,11 +64,10 @@ const Echart = () => {
         return -1;
       }
     });
-    console.log(arrayList);
     return arrayList;
   };
   const seriesList: number[] = [];
-  keyValueList().map(item => {
+  keyValueList().forEach(item => {
     seriesList.push(item.value);
   });
 
