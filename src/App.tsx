@@ -1,11 +1,12 @@
 import React from 'react';
 import {HashRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import Label from './views/Label';
-import Statistics from './views/Statistics';
-import Money from './views/Money';
-import NoMatch from './views/NoMatch';
+import {Label} from './views/Label';
+import {Statistics} from './views/Statistics';
+import {Money} from './views/Money';
+import {NoMatch} from './views/NoMatch';
 import {EditLabel} from './views/EditLabel';
 import styled from 'styled-components';
+import {Echart} from './views/Echart';
 
 const AppWrapper = styled.div`
   color: #333;
@@ -28,7 +29,9 @@ function App() {
           <Route exact path="/statistics">
             <Statistics/>
           </Route>
-
+          <Route exact path="/statistics/:type">
+            <Echart/>
+          </Route>
           <Redirect exact from="/" to="/money"/>
           <Route path="*">
             <NoMatch/>
