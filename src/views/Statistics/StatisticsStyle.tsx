@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Icon from '../../components/Icons';
+import React from 'react';
 
 const TypeTab = styled.ul`
   display: flex;
@@ -13,8 +15,8 @@ const TypeTab = styled.ul`
 
     &.selected {
       font-weight: bolder;
-      color: #518C9E;
-      border-bottom: 3px solid #518C9E;
+      color: #ffa115;
+      border-bottom: 3px solid #ffa115;
     }
   }
 `;
@@ -27,7 +29,6 @@ const MorneyList = styled.ol`
     align-items: center;
 
     .showEchart {
-      color: #518C9E;
       display: flex;
     }
 
@@ -48,11 +49,11 @@ const MorneyList = styled.ol`
     padding: 10px 0;
     border-bottom: 10px solid #f5f5f5;
     line-height: 30px;
-    font-size: 14px;
 
     > h3 {
+      font-size: 16px;
       padding: 0 16px;
-      color: #ffa115;
+      color: #518C9E;
       display: flex;
       justify-content: space-between;
     }
@@ -71,4 +72,33 @@ const MorneyList = styled.ol`
     }
   }
 `;
-export {TypeTab,MorneyList};
+const NoRecordDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  color: rgb(0,0,0,0.2);
+  > h3 {
+    color: #8a8a8a;
+  }
+  > .icon{
+    width: 6em;
+    height:6em;
+    margin-bottom: 30px;
+  }
+  &.hide {
+    display: none;
+  }
+`
+type Props ={
+  visible: boolean
+}
+const NoRecord = (props: Props) => {
+  return (
+    <NoRecordDiv className={props.visible?'hide':''}>
+      <Icon name="noresult"/>
+      <h3>快去记录一笔帐吧！</h3>
+    </NoRecordDiv>
+  )
+}
+export {TypeTab,MorneyList,NoRecord};

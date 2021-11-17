@@ -1,48 +1,17 @@
 import Layout from '../components/Layout';
 import React, {useState} from 'react';
 import Icon from '../components/Icons';
-import {RecordItem, useRecords} from '../hooks/useRecords';
-import {MorneyList, TypeTab} from './Money/Statistics/StatisticsStyle';
-import {BeautifulTitle} from './Money/Statistics/BeautifulTitle';
-
+import {MorneyList, NoRecord, TypeTab} from './Statistics/StatisticsStyle';
+import {categoryTotal, dayTotal, tagString , BeautifulTitle} from './Statistics/DataSorting';
+import {Link} from 'react-router-dom'
+import {ClassifyRecords} from './Statistics/ClassifyRecords';
 
 const Statistics = () => {
   const categoryMap = {'-': '支出', '+': '收入'};
   type Keys = keyof typeof categoryMap
   const [types] = useState<Keys[]>(['-', '+']);
   const [selectType, setSelectType] = useState<Keys>('-');
-  const {records} = useRecords();
-  const selectedRecords = records.filter(r => r.category === selectType);
-  const hash: { [K: string]: RecordItem[] } = {};
-  selectedRecords.forEach(r => {
-    const key = r.date;
-    if (!(key in hash)) {
-      hash[key] = [];
-    }
-    hash[key].push(r);
-  });
-  const array = Object.entries(hash).sort((a, b) => {
-    if (a[0] === b[0]) return 0;
-    if (a[0] > b[0]) return -1;
-    if (a[0] < b[0]) return 1;
-    return 0;
-  });
-  const dayTotal = (records: RecordItem[]) => {
-    let total = 0
-    records.forEach(t => {
-      total += parseFloat(t.amount)})
-    return total
-  }
-  const categoryTotal = ()=> {
-    let total = 0
-    array.forEach(item=> item[1].forEach(t=>{
-      total+=parseFloat(t.amount)
-    }))
-    return total
-  }
-  const tagString = (tag: string[]) => {
-    return tag.join('，');
-  };
+  const array = ClassifyRecords(selectType)
 
   return (
     <Layout>
@@ -61,10 +30,12 @@ const Statistics = () => {
         <li className="message">
           <div className="totalMoney">
             <Icon name={selectType === '-'? 'countout':'countin'}/>
-            <span>{categoryTotal()}</span>
+            <span>{categoryTotal(array)}</span>
           </div>
           <div className="showEchart">
-            <Icon name="chart"/>
+            <Link to={`/statistics/${selectType}`} >
+              <Icon name="chart"/>
+            </Link>
           </div>
         </li>
         {array.map(([date, records], key) => {
@@ -84,7 +55,8 @@ const Statistics = () => {
           );
         })}
       </MorneyList>
+      <NoRecord visible={array.length > 0}/>
     </Layout>
   );
 };
-export default Statistics;
+export {Statistics};
