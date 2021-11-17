@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Icon from '../components/Icons';
+import Icon from './Icons';
 import React, {useRef} from 'react';
 
 const DateSection = styled.section`

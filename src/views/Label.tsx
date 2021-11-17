@@ -47,4 +47,4 @@ const Label = () => {
     </Layout>
   )
 }
-export default Label;
+export {Label};

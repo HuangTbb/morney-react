@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {EditInput} from './EditInput';
+import {EditInput} from '../components/EditInput';
 import {useEffect, useState} from 'react';
 import {GotoBack} from '../components/GotoBack';
 import {Button} from '../components/Button';
@@ -34,6 +34,7 @@ const EditLabelDiv = styled.div`
   > .noExist{
     text-align: center;
     margin-top: 100px;
+    color: #8a8a8a;
   }
 `;
 type Params = {
@@ -92,7 +93,7 @@ const EditLabel = () => {
         <span>编辑标签</span>
         <div className="hide">编标签</div>
       </div>
-      {tag ? tagContent(tag) : <h2 className="noExist">标签不存在</h2>}
+      {tag ? tagContent(tag) : <h3 className="noExist">标签不存在</h3>}
       <AlertItem visible={visible} message={message}/>
     </EditLabelDiv>
   );

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {Type} from './Money/Type';
 import {Tags} from './Money/Tags';
 import {NumberPad} from './Money/NumberPad';
-import {EditInput} from './EditInput';
+import {EditInput} from '../components/EditInput';
 import {useRecords} from '../hooks/useRecords';
 import {AlertItem} from '../components/AlertItem';
 
@@ -69,4 +69,4 @@ function Money() {
     </MyLayout>
   );
 }
-export default Money;
+export {Money};
