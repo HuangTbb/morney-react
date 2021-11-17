@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import Icon from './Icons';
 
 const Alert = styled.div`
   position: absolute;
@@ -13,14 +12,7 @@ const Alert = styled.div`
   padding: 25px;
   white-space: nowrap;
   color: #fff;
-  > div {
-    display: flex;
-    align-items: center;
-    > p {
-      padding-top: 4px;
-      padding-left: 10px;
-    }
-  }
+  
   &.hide{
     display: none;
   }
@@ -32,10 +24,7 @@ type Props = {
 const AlertItem: React.FC<Props> = (props: Props) => {
   return (
     <Alert className={props.visible?'': 'hide'}>
-      <div>
-        <Icon name="alert"/>
-        <p>{props.message}</p>
-      </div>
+      <p>{props.message}</p>
     </Alert>
   )
 }
