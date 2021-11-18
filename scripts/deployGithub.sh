@@ -8,6 +8,4 @@ git commit -m 'deploy' &&
 git branch -M main &&
 git remote add origin git@github.com:HuangTbb/morney-website.git &&
 git push -u origin main -f
-#git remote add origin git@gitee.com:huangtobe/morney-website.git &&
-#git push -u origin master -f
 cd -
