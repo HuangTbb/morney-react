@@ -6,26 +6,27 @@ const Alert = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background:  #518C9E;
+  background: #fff;
   border-radius: 10px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
   padding: 25px;
   white-space: nowrap;
-  color: #fff;
-  
-  &.hide{
+
+  &.hide {
     display: none;
   }
-`
+`;
 type Props = {
   visible: boolean;
   message: string;
 }
+
 const AlertItem: React.FC<Props> = (props: Props) => {
   return (
-    <Alert className={props.visible?'': 'hide'}>
+    <Alert className={props.visible ? '' : 'hide'}>
       <p>{props.message}</p>
     </Alert>
-  )
-}
-export {AlertItem}
+  );
+};
+
+export {AlertItem};

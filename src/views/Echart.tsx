@@ -37,6 +37,9 @@ type Params = {
 const Echart = () => {
   const {type} = useParams<Params>();
   const array = ClassifyRecords(type);
+  const chartWrapper = useRef<HTMLDivElement>(null);
+  const container = useRef<HTMLDivElement>(null);
+  const seriesList: number[] = [];
   let dateStringArray: string[] = [];
   const keyValueList = () => {
     const arrayList = [];
@@ -66,13 +69,9 @@ const Echart = () => {
     });
     return arrayList;
   };
-  const seriesList: number[] = [];
   keyValueList().forEach(item => {
     seriesList.push(item.value);
   });
-
-  const chartWrapper = useRef<HTMLDivElement>(null);
-  const container = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const chartDom = (container.current as HTMLDivElement);
     const chartWrapperDom = (chartWrapper.current as HTMLDivElement);

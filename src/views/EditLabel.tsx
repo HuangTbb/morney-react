@@ -47,6 +47,15 @@ const EditLabel = () => {
   const tag = findTag(parseInt(id));
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('');
+  let timer: NodeJS.Timeout
+  useEffect(()=> {
+    return ()=>{
+      setVisible(false);
+      setMessage('');
+      // @ts-ignore
+      window.clearTimeout(timer)
+    }
+  },[])
   const setAlert = (alertmessage: string) => {
     setVisible(true);
     setMessage(alertmessage);

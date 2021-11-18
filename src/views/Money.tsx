@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Type} from './Money/Type';
 import {Tags} from './Money/Tags';
@@ -7,6 +7,7 @@ import {NumberPad} from './Money/NumberPad';
 import {EditInput} from '../components/EditInput';
 import {useRecords} from '../hooks/useRecords';
 import {AlertItem} from '../components/AlertItem';
+import {setTimeout} from 'timers';
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -27,10 +28,11 @@ function Money() {
   const [selected, setSelected] = useState(defaultFormData);
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('');
+
   const setAlert = (alertmessage: string) => {
     setVisible(true);
     setMessage(alertmessage);
-    setTimeout(() => {
+    timer = setTimeout(() => {
       setVisible(false);
       setMessage('');
     }, 1600);
@@ -49,7 +51,15 @@ function Money() {
       }
     }
   }
-
+  let timer: NodeJS.Timeout
+  useEffect(()=> {
+    return ()=>{
+      setVisible(false);
+      setMessage('');
+      // @ts-ignore
+      window.clearTimeout(timer)
+    }
+  },[])// eslint-disable-next-line react-hooks/exhaustive-deps
   return (
     <MyLayout>
       <Tags value={selected.tags}

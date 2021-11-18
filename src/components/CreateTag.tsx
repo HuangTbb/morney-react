@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {AlertItem} from './AlertItem';
 
 const CreateTagDiv = styled.div`
@@ -66,6 +66,15 @@ const CreateTag: React.FC<Props> = (props:Props) => {
   const refInput = useRef<HTMLInputElement>(null)
   const [visible,setVisible] = useState(false)
   const [message,setMessage] = useState('')
+  let timer: NodeJS.Timeout
+  useEffect(()=> {
+    return ()=>{
+      setVisible(false);
+      setMessage('');
+      // @ts-ignore
+      window.clearTimeout(timer)
+    }
+  },[])
   const setAlert = (alertmessage: string) => {
     setVisible(true)
     setMessage(alertmessage)
