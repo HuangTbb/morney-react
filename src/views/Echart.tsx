@@ -72,6 +72,11 @@ const Echart = () => {
   keyValueList().forEach(item => {
     seriesList.push(item.value);
   });
+  const MoneySum = ()=>{
+    let sum = 0
+    seriesList.forEach(item => sum+=item)
+    return sum
+  }
   useEffect(() => {
     const chartDom = (container.current as HTMLDivElement);
     const chartWrapperDom = (chartWrapper.current as HTMLDivElement);
@@ -125,7 +130,7 @@ const Echart = () => {
       </Link>
       <div className="chartTitle">
         <h3>近30天{type === '-' ? '支出' : '收入'}统计图表</h3>
-        <p>30天总{type === '-' ? '支出' : '收入'}元</p>
+        <p>30天总{type === '-' ? '支出' : '收入'}：{MoneySum()}元</p>
       </div>
       <div className="chartBox-wrapper" ref={chartWrapper}>
         <div className="chartBox" ref={container}/>
