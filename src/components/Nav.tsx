@@ -4,29 +4,37 @@ import React, {useEffect, useRef, useState} from 'react';
 import Icon from './Icons';
 
 const NavWrapper = styled.nav`
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding-top: 5px;
   > ul {
     display: flex;
     > li {
       flex-grow: 1;
       text-align: center;
       padding: 4px 0 2px 0;
-      font-size: 12px;
+      font-size: 10px;
       > a {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 2px 0;
+        padding: 4px 0 2px 0;
+        color: #a6a7ac;
         > .icon {
-          width: 22px;
-          height: 22px;
+          width: 2em;
+          height: 2em;
+          fill: currentColor;
         }
         > p {
           padding-top: 2px;
         }
         &.selected{
-          color: #ffa115;
+          color: #232428;
+          > .icon{
+            fill: currentColor;
+          }
         }
       }
       
@@ -38,6 +46,7 @@ const Nav = () => {
   const navLink = useRef<HTMLAnchorElement>(null)
   const navLink1 = useRef<HTMLAnchorElement>(null)
   const navLink2 = useRef<HTMLAnchorElement>(null)
+  // eslint-disable-next-line
   const [iconName, setIconName] = useState("")
   useEffect(()=> {
       if(navLink.current!.className === 'selected'){
@@ -53,19 +62,19 @@ const Nav = () => {
       <ul>
         <li>
           <NavLink  to="/tags" activeClassName="selected" replace ref={navLink}>
-            <Icon name={iconName==='label'?iconName:'labelblur'}/>
+            <Icon name='label'/>
             <p>标签</p>
           </NavLink >
         </li>
         <li>
           <NavLink  to="/money" activeClassName="selected" replace ref={navLink1}>
-            <Icon name={iconName==='money'?iconName:'moneyblur'}/>
+            <Icon name='money'/>
             <p>记账</p>
           </NavLink >
         </li>
         <li>
           <NavLink  to="/statistics" activeClassName="selected" replace ref={navLink2}>
-            <Icon name={iconName==='statistics'?iconName:'statisticsblur'}/>
+            <Icon name='statistics'/>
             <p>统计</p>
           </NavLink >
         </li>

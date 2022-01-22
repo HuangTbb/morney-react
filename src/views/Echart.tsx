@@ -8,22 +8,34 @@ import * as echarts from 'echarts';
 import {useEffect, useRef} from 'react';
 
 const EchartWrapper = styled.div`
+  .back {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 13px;
+    > .fill {
+      width: 70px;
+      height: 70px;
+    }
+  }
   > .chartTitle {
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 16px;
-
+    margin: 0 14px 10px 14px;
+    background: #ffffff;
+    border-radius: 20px;
     > p {
-      padding-top: 20px;
-      font-weight: bold;
-      color: #518C9E;
+      padding: 10px;
     }
   }
   > .chartBox-wrapper{
     overflow: auto;
     > .chartBox {
       width: 440%;
-      height: 400px;
+      height: 400px; 
+      background: #fff;
+      margin-top: 15px;
+      border-radius: 20px;
+      overflow: auto;
     }
     &::-webkit-scrollbar {
       display: none;
@@ -47,7 +59,7 @@ const Echart = () => {
       const dateString = dayjs(new Date())
         .subtract(i, 'day')
         .format('YYYY-MM-DD');
-      dateStringArray.push(dateString.substr(5,));
+      dateStringArray.unshift(dateString.substr(5,));
       const found = _.find(array,
         function (i) {return i[0] === dateString;}
       );
@@ -77,19 +89,19 @@ const Echart = () => {
     seriesList.forEach(item => sum+=item)
     return sum
   }
+  
   useEffect(() => {
     const chartDom = (container.current as HTMLDivElement);
     const chartWrapperDom = (chartWrapper.current as HTMLDivElement);
-
-    type EChartOption = echarts.EChartsOption
+    type EChartOption = echarts.EChartsOption;
     const myChart = echarts.init(chartDom);
     let option: EChartOption;
     option = {
-      color: ['#ffa115'],
+      color: ['#232428'],
       grid: {
         left: 16,
         right: 80,
-        top: 50,
+        top: 80,
       },
       tooltip: {
         trigger: 'item',
@@ -101,36 +113,64 @@ const Echart = () => {
           alignWithLabel: true,
           inside: true,
         },
+        axisLine: {
+          show: false,
+        },
         data: dateStringArray,
       },
       yAxis: {
         type: 'value',
         position: 'right',
+        splitLine: {
+          show: false,
+        },
       },
       series: [
         {
           data: seriesList,
-          type: 'line',
-          symbolSize: 16,
-          colorBy: 'data',
-          symbol: 'circle',
-          lineStyle: {
-            color: '#518C9E',
+          type: "bar",
+          showBackground: true,
+          backgroundStyle: {
+            color: "#efefef",
+            borderRadius: [10, 10, 10, 10],
           },
+          label: {
+            position: "top",
+            show: true,
+            distance: 10,
+            fontWeight: "bold",
+          },
+          itemStyle: {
+            borderRadius: 10
+          }
         },
       ],
     }
     option && myChart.setOption(option);
     chartWrapperDom.scrollLeft = chartDom.scrollWidth
+
+    let divX: number = 0;
+    chartDom.onmousedown=function(event){
+      divX=event.clientX-chartDom.offsetLeft; 
+      document.onmousemove=function(event){
+        chartDom.style.left=event.clientX-divX+"px";
+      }
+      document.onmouseup=function(){
+        document.onmousemove=null;
+        document.onmouseup=null;
+        return false;
+      }
+    }
   });
   return (
     <EchartWrapper>
-      <Link to="/statistics">
-        <GotoBack/>
-      </Link>
+      <div className='back'>
+        <Link to="/statistics"><GotoBack/></Link>
+        <span>近30天{type === '-' ? '支出' : '收入'}统计图</span>
+        <div className="fill" />
+      </div>
       <div className="chartTitle">
-        <h3>近30天{type === '-' ? '支出' : '收入'}统计图表</h3>
-        <p>30天总{type === '-' ? '支出' : '收入'}：{MoneySum()}元</p>
+        <p>近30天总{type === '-' ? '支出' : '收入'}：{MoneySum()}元</p>
       </div>
       <div className="chartBox-wrapper" ref={chartWrapper}>
         <div className="chartBox" ref={container}/>

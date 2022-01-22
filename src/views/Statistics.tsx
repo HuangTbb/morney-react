@@ -1,41 +1,35 @@
 import Layout from '../components/Layout';
 import React, {useState} from 'react';
 import Icon from '../components/Icons';
-import {MorneyList, NoRecord, TypeTab} from './Statistics/StatisticsStyle';
+import {MorneyList, NoRecord, Top} from './Statistics/StatisticsStyle';
 import {categoryTotal, dayTotal, tagString , BeautifulTitle} from './Statistics/DataSorting';
 import {Link} from 'react-router-dom'
 import {ClassifyRecords} from './Statistics/ClassifyRecords';
+import { Type } from './Money/Type';
 
 const Statistics = () => {
   const categoryMap = {'-': '支出', '+': '收入'};
-  type Keys = keyof typeof categoryMap
-  const [types] = useState<Keys[]>(['-', '+']);
+  type Keys = keyof typeof categoryMap;
   const [selectType, setSelectType] = useState<Keys>('-');
   const array = ClassifyRecords(selectType)
 
   return (
     <Layout>
-      <TypeTab>
-        {types.map(type => {
-          return (
-            <li key={type}
-                className={selectType === type ? 'selected' : ''}
-                onClick={() => setSelectType(type)}>
-              {categoryMap[type]}
-            </li>
-          );
-        })}
-      </TypeTab>
+      <Top>
+        <Type value={selectType}
+              onChange={selectType => setSelectType(selectType)}/>
+      
+        <div className="showEchart">
+          <Link to={`/statistics/${selectType}`} >
+            <Icon name="chart"/>
+          </Link>
+        </div>
+      </Top>
       <MorneyList>
         <li className="message">
           <div className="totalMoney">
             <Icon name={selectType === '-'? 'countout':'countin'}/>
             <span>{categoryTotal(array)}</span>
-          </div>
-          <div className="showEchart">
-            <Link to={`/statistics/${selectType}`} >
-              <Icon name="chart"/>
-            </Link>
           </div>
         </li>
         {array.map(([date, records], key) => {
@@ -47,7 +41,7 @@ const Statistics = () => {
                   <li className="detailsList" key={key}>
                     <span className="tagSpan">{tagString(r.tags)}</span>
                     <span className="noteSpan">{r.note}</span>
-                    <span className="amountSpan">￥{r.amount}</span>
+                    <span className="amountSpan">{r.amount}</span>
                   </li>
                 )}
               </ol>

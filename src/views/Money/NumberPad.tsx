@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import NumberPadSection from './NumberPad/NumberPadSections';
 import {countSum} from './NumberPad/countSum';
 import {containSign} from './NumberPad/containSign';
+import Icon from 'components/Icons';
 
 type Props = {
   value: string,
@@ -59,27 +60,37 @@ const NumberPad: React.FC<Props> = (props:Props) => {
     setOutput('0');
     props.onChange('0');
   }
-
+  useEffect(()=> {
+    return ()=>{
+      const ok: HTMLElement | null = document.querySelector(".ok");
+      if (ok) {
+        ok.style.height =
+          (120 + parseInt(getComputedStyle(ok).marginTop.split("px")[0]) * 2).toString() + 'px';
+      }
+    }
+  })
   return (
     <NumberPadSection>
-      <div className="outputSum">{outputSum}</div>
-      <div className="output">{output}</div>
+      <div className="resultBox">
+        <div className="outputSum">￥{outputSum}</div>
+        <div className="output">{output}</div>
+      </div>
       <div className="pad clearfix">
         <button onClick={inputContent}>1</button>
         <button onClick={inputContent}>2</button>
         <button onClick={inputContent}>3</button>
         <button onClick={inputContent}>+</button>
-        <button onClick={remove} className="remove">删除</button>
+        <button onClick={remove} className="remove"><Icon name="clear"/></button>
         <button onClick={inputContent}>4</button>
         <button onClick={inputContent}>5</button>
         <button onClick={inputContent}>6</button>
         <button onClick={inputContent}>-</button>
-        <button onClick={clear} className="clear">清空</button>
+        <button onClick={clear} className="clear">C</button>
         <button onClick={inputContent}>7</button>
         <button onClick={inputContent}>8</button>
         <button onClick={inputContent}>9</button>
         <button onClick={inputContent}>×</button>
-        <button onClick={props.onOk} className="ok">确定</button>
+        <button onClick={props.onOk} className="ok">OK</button>
         <button onClick={inputContent} className="zero">0</button>
         <button onClick={inputContent}>.</button>
         <button onClick={inputContent}>÷</button>

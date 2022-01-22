@@ -3,26 +3,26 @@ import React from 'react';
 import {useTags} from '../../hooks/useTags';
 
 const TagsSection = styled.section`
-  padding: 10px 0;
-  color: #fff;
   flex-grow: 1;
-  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
-  overflow: auto;
-  flex-shrink: 1;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
   > ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 
     > li {
-      height: 24px;
-      line-height: 24px;
+      height: 28px;
+      line-height: 28px;
       border-radius: 12px;
-      padding: 0 16px;
+      padding: 0 20px;
       margin: 10px;
-      background: #518C9E;
+      background: #ffffff;
       &.selected{
-        background: #ffa115;
+        background: #232428;
+        color: #ffffff;
       }
     }
   }

@@ -1,26 +1,21 @@
 import styled from 'styled-components';
-import Icon from '../../components/Icons';
 import React, {useState} from 'react';
 
 const TypeSection = styled.section`
-  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
   display: flex;
-  justify-content: center;
-  padding: 10px 0;
+  justify-content: left;
+  margin: 14px 0 0 14px;
  
   > div {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    > p {
-      margin-left: 5px;
-    }
+    padding: 0 4px;
+    color: #a6a7ac;
+    font-size: 16px;
+    margin: 5px 10px;
 
     &.selected {
-      color: #ffa115;
       font-weight: bold;
+      border-bottom: 2px solid #232428;
+      color: #232428;
     }
   }
 `;
@@ -37,12 +32,11 @@ const Type: React.FC<Props> = (props: Props) => {
   const selectedType = props.value
 
   return (
-    <TypeSection>
+    <TypeSection className='type'>
       {types.map(type =>
         <div key={type}
              onClick={()=>props.onChange(type)}
              className={selectedType === type? 'selected': ''}>
-          <Icon name={selectedType === type? 'choose': 'nochoose'}/>
           <p>{categoryMap[type]}</p>
         </div>
       )}

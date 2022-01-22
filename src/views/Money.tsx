@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Type} from './Money/Type';
 import {Tags} from './Money/Tags';
@@ -32,10 +32,10 @@ function Money() {
   const setAlert = (alertmessage: string) => {
     setVisible(true);
     setMessage(alertmessage);
-    timer = setTimeout(() => {
+    setTimeout(() => {
       setVisible(false);
       setMessage('');
-    }, 1600);
+    }, 800);
   };
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({...selected,...obj });
@@ -51,27 +51,19 @@ function Money() {
       }
     }
   }
-  let timer: NodeJS.Timeout
-  useEffect(()=> {
-    return ()=>{
-      setVisible(false);
-      setMessage('');
-      // @ts-ignore
-      window.clearTimeout(timer)
-    }
-  },[])// eslint-disable-next-line react-hooks/exhaustive-deps
   return (
     <MyLayout>
-      <Tags value={selected.tags}
-            onChange={tags => onChange({tags})}/>
-      <EditInput name="备注" iconName="remarks" type="text" placeholder="请输入备注"
-                 value={selected.note}
-                 onChange={note => onChange({note})}/>
-      <EditInput name="日期" iconName="date" type="date"
-                 value={selected.date}
-                 onChange={date => onChange({date})}/>
       <Type value={selected.category}
             onChange={category => onChange({category})}/>
+      <Tags value={selected.tags}
+            onChange={tags => onChange({tags})}/>
+      <EditInput name="备注" type="text" placeholder="请输入备注"
+                 value={selected.note}
+                 onChange={note => onChange({note})}/>
+      <EditInput name="日期" type="date"
+                 value={selected.date}
+                 onChange={date => onChange({date})}/>
+      
       <NumberPad value={selected.amount}
                  onChange={amount => onChange({amount})}
                  onOk={()=>Submit()}/>

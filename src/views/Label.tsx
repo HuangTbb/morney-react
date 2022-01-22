@@ -8,17 +8,22 @@ import {Button} from '../components/Button';
 import {CreateTag} from 'components/CreateTag';
 
 const TagList = styled.ol`
-  padding:0 0 16px 16px;
-  margin: 14px 0;
-
+  padding: 0 14px;
+  margin-top: 20px;
+  margin-bottom: 50px;
   > li {
-    padding: 4px 10px 4px 0;
-    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+    padding: 15px 15px 15px 18px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border-radius: 20px;
     > a {
-      padding: 8px 6px 8px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      > .icon{
+        width: 2.2em;
+        height: 2.2em;
+      }
     }
   }
 `;

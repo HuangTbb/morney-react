@@ -9,9 +9,12 @@ import styled from 'styled-components';
 import {Echart} from './views/Echart';
 
 const AppWrapper = styled.div`
-  color: #333;
+  max-width: 500px;
+  margin: 0 auto;
 `;
-
+if (document.documentElement.clientWidth > 500) {
+  window.alert("请使用手机打开本页面，以保证浏览效果");
+}
 function App() {
   return (
     <AppWrapper>

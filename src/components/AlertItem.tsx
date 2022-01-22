@@ -2,19 +2,29 @@ import styled from 'styled-components';
 import React from 'react';
 
 const Alert = styled.div`
-  position: absolute;
+width: 100vw;
+height: 100vh;
+background: rgba(255,255,255,0);
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+&.hide {
+  display: none;
+}
+> .alertMessage{
+  position: fixed;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
+  top: 50px;
+  transform: translateX(-50%);
+  background: #232428;
   border-radius: 10px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
-  padding: 25px;
+  padding: 20px;
   white-space: nowrap;
-
-  &.hide {
-    display: none;
-  }
+  color: #fff;
+  font-size: 14px;
+}
 `;
 type Props = {
   visible: boolean;
@@ -24,7 +34,10 @@ type Props = {
 const AlertItem: React.FC<Props> = (props: Props) => {
   return (
     <Alert className={props.visible ? '' : 'hide'}>
-      <p>{props.message}</p>
+      <div className='alertMessage'>
+        <p>{props.message}</p>
+      </div>
+
     </Alert>
   );
 };

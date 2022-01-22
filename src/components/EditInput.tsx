@@ -1,32 +1,30 @@
 import styled from 'styled-components';
-import Icon from './Icons';
 import React, {useRef} from 'react';
 
 const DateSection = styled.section`
-  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
-  padding: 0 16px;
-  background: #fff;
+  margin-bottom: 10px;
   > label {
+    font-size: 14px;
     display: flex;
     align-items: center;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 3px 0;
     > p {
-      padding-right: 16px;
       white-space: nowrap;
-      padding-left: 8px;
+      padding-left: 20px;
+      padding-right: 10px;
     }
-
     > input {
       height: 50px;
       flex-grow: 1;
-      background: #fff;
-      font-family: inherit;
-      font-size: 14px;
+      padding: 0 8px;
+      border-radius: 10px;
     }
   }
 `;
 type Props = {
   name: string;
-  iconName: string;
   type: string;
   placeholder?: string;
   value: string;
@@ -42,7 +40,6 @@ const EditInput: React.FC<Props> = (props: Props) => {
   return (
     <DateSection>
       <label>
-        <Icon name={props.iconName}/>
         <p>{props.name}</p>
         <input
           type={props.type}

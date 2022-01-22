@@ -2,29 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {Button} from '../components/Button';
+import Icon from 'components/Icons';
 
 const NoMatchDiv = styled.div`
-  text-align: center;
-  margin-top: 100px;
-  color: #8a8a8a;
-  > h1 {
-    font-size: 50px;
-  }
-  > h3 {
-    padding-bottom: 35px;
-  }
-  > a{
-    > button{
-      background: #8a8a8a;
-      color: #fff;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > .icon{
+    width: 25em;
+    height: 25em;
   }
 `;
 const NoMatch = () => {
   return (
     <NoMatchDiv>
-      <h1>404</h1>
-      <h3>当前路径不存在</h3>
+      <Icon name="404" />
       <Link to="/money">
         <Button name="返回首页"/>
       </Link>
