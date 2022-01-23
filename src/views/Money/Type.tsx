@@ -11,7 +11,7 @@ const TypeSection = styled.section`
     color: #a6a7ac;
     font-size: 16px;
     margin: 5px 10px;
-
+    cursor: pointer;
     &.selected {
       font-weight: bold;
       border-bottom: 2px solid #232428;
