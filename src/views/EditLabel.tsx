@@ -63,7 +63,7 @@ const EditLabel = () => {
       <div className="editButtons">
         <Button name="修改" onClick={() => {
           if(tags.map(tag=>tag.name).indexOf(newName)>=0){
-            setAlert('修改成功')
+            setAlert('标签名已存在')
           }else if(newName.trim()=== ''){
             setAlert("标签名不能为空")
           }else if(newName.trim().length > 10){
